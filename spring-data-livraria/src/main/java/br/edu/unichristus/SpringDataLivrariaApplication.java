@@ -11,6 +11,12 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+/**
+ * Classe de execução da aplicação Spring Boot
+ * 
+ * @author Glaydson
+ *
+ */
 @SpringBootApplication
 public class SpringDataLivrariaApplication implements CommandLineRunner {
 
@@ -28,6 +34,9 @@ public class SpringDataLivrariaApplication implements CommandLineRunner {
 		// Incluindo um novo livro
 		Livro livro = new Livro("Java Como Programar", LocalDate.now(), 250, new BigDecimal("15.00"));
 		this.servicoLivros.salvar(livro);
+
+		// Buscar todos os livros
+		this.servicoLivros.buscarTodos().forEach(l -> System.out.println(l));
 
 		// Buscando um livro pelo seu ID
 		Livro livro1 = this.servicoLivros.buscarPeloID(1L);
@@ -70,7 +79,8 @@ public class SpringDataLivrariaApplication implements CommandLineRunner {
 		List<Livro> livros6 = this.servicoLivros.buscarPeloTituloLike("%de%");
 		livros6.forEach(l -> System.out.println(l));
 
-		// Buscando livros cujos títulos contenham uma string - usando Containing
+		// Buscando livros cujos títulos contenham uma string - usando
+		// Containing
 		this.servicoLivros.buscarPeloTituloContendo("de").forEach(l -> System.out.println(l));
 
 		// Buscando livros cujos títulos iniciem por uma string
@@ -173,7 +183,8 @@ public class SpringDataLivrariaApplication implements CommandLineRunner {
 		List<Editora> editorasAB = this.servicoEditoras.buscarIniciandoEm1Ou2("A", "B");
 		editorasAB.forEach(ed -> System.out.println(ed));
 
-		// 6 - BUSCAR AS EDITORAS DO RIO DE JANEIRO, CUJO ANO DE FUNDAÇÃO SEJA POSTERIOR A 2000
+		// 6 - BUSCAR AS EDITORAS DO RIO DE JANEIRO, CUJO ANO DE FUNDAÇÃO SEJA
+		// POSTERIOR A 2000
 		List<Editora> editorasRio2000 = this.servicoEditoras.buscarPorCidadeEAnoFundacaoMaiorQue("Rio de Janeiro",
 				2000);
 		editorasRio2000.forEach(ed -> System.out.println(ed));

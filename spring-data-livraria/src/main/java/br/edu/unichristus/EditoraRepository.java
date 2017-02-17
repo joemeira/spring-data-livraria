@@ -5,6 +5,11 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+/**
+ * Interface para o repositório de Editoras
+ * @author Glaydson
+ *
+ */
 @Repository
 public interface EditoraRepository extends JpaRepository<Editora, Long> {
 
