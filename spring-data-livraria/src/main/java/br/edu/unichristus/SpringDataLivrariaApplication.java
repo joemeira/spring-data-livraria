@@ -11,7 +11,16 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+<<<<<<< HEAD
 // @SpringBootApplication
+=======
+/**
+ * Classe de execução da aplicação Spring Boot
+ * 
+ * @author Glaydson
+ *
+ */
+@SpringBootApplication
 public class SpringDataLivrariaApplication implements CommandLineRunner {
 
 	@Autowired
@@ -28,6 +37,9 @@ public class SpringDataLivrariaApplication implements CommandLineRunner {
 		// Incluindo um novo livro
 		Livro livro = new Livro("Java Como Programar", LocalDate.now(), 250, new BigDecimal("15.00"));
 		this.servicoLivros.salvar(livro);
+
+		// Buscar todos os livros
+		this.servicoLivros.buscarTodos().forEach(l -> System.out.println(l));
 
 		// Buscando um livro pelo seu ID
 		Livro livro1 = this.servicoLivros.buscarPeloID(1L);
@@ -70,7 +82,8 @@ public class SpringDataLivrariaApplication implements CommandLineRunner {
 		List<Livro> livros6 = this.servicoLivros.buscarPeloTituloLike("%de%");
 		livros6.forEach(l -> System.out.println(l));
 
-		// Buscando livros cujos títulos contenham uma string - usando Containing
+		// Buscando livros cujos títulos contenham uma string - usando
+		// Containing
 		this.servicoLivros.buscarPeloTituloContendo("de").forEach(l -> System.out.println(l));
 
 		// Buscando livros cujos títulos iniciem por uma string
@@ -150,6 +163,34 @@ public class SpringDataLivrariaApplication implements CommandLineRunner {
 		// Incluindo uma nova editora
 		Editora e = new Editora("Érica", "Rio de Janeiro", 1937);
 		this.servicoEditoras.salvar(e);
+
+		// 1 - ALTERAR A CIDADE DA EDITORA BOOKMAN PARA PORTO ALEGRE
+		Editora bookman = this.servicoEditoras.buscarPeloNome("Bookman");
+		bookman.setCidade("Porto Alegre");
+		this.servicoEditoras.salvar(bookman);
+		System.out.println(bookman);
+
+		// 2 - REMOVER A EDITORA MODERNA
+		Editora moderna = this.servicoEditoras.buscarPeloNome("Moderna");
+		this.servicoEditoras.remover(moderna);
+
+		// 3 - BUSCAR AS EDITORAS COM ANO DE FUNDAÇÃO ENTRE 1970 E 2010
+		List<Editora> editoras19702010 = this.servicoEditoras.buscarPeloAnoDeFundacaoEntre(1970, 2010);
+		editoras19702010.forEach(ed -> System.out.println(ed));
+
+		// 4- BUSCAR AS EDITORAS COM SEDE NO RIO DE JANEIRO
+		List<Editora> editorasRio = this.servicoEditoras.buscarPelaCidade("Rio de Janeiro");
+		editorasRio.forEach(ed -> System.out.println(ed));
+
+		// 5 - BUSCAR AS EDITORAS CUJO NOME INICIE PELAS LETRAS 'A' OU 'B'
+		List<Editora> editorasAB = this.servicoEditoras.buscarIniciandoEm1Ou2("A", "B");
+		editorasAB.forEach(ed -> System.out.println(ed));
+
+		// 6 - BUSCAR AS EDITORAS DO RIO DE JANEIRO, CUJO ANO DE FUNDAÇÃO SEJA
+		// POSTERIOR A 2000
+		List<Editora> editorasRio2000 = this.servicoEditoras.buscarPorCidadeEAnoFundacaoMaiorQue("Rio de Janeiro",
+				2000);
+		editorasRio2000.forEach(ed -> System.out.println(ed));
 
 	}
 
