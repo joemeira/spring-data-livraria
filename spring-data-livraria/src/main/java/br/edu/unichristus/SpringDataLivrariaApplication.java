@@ -11,16 +11,13 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-<<<<<<< HEAD
-// @SpringBootApplication
-=======
 /**
  * Classe de execução da aplicação Spring Boot
  * 
  * @author Glaydson
  *
  */
-@SpringBootApplication
+//@SpringBootApplication
 public class SpringDataLivrariaApplication implements CommandLineRunner {
 
 	@Autowired
