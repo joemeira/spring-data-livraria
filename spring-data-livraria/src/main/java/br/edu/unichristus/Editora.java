@@ -1,10 +1,13 @@
 package br.edu.unichristus;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -24,6 +27,9 @@ public class Editora {
 
 	@Column(name = "ANO_FUNDACAO")
 	private int anoFundacao;
+
+	@OneToMany(mappedBy = "editora")
+	private List<Livro> livros;
 
 	public Editora() {
 

@@ -2,11 +2,16 @@ package br.edu.unichristus;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -16,14 +21,25 @@ public class Livro {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "LIVRO_ID")
 	private Long livroID;
+
 	@Column(name = "TITULO")
 	private String titulo;
+
 	@Column(name = "DATA_PUBLICACAO")
 	private LocalDate dataPublicacao;
+
 	@Column(name = "NUMERO_PAGINAS")
 	private int numeroPaginas;
+
 	@Column(name = "PRECO")
 	private BigDecimal preco;
+
+	@ManyToOne
+	@JoinColumn(name = "EDITORA_ID")
+	private Editora editora;
+
+	@ManyToMany(mappedBy = "livros")
+	private List<Autor> autores;
 
 	public Livro() {
 	}
@@ -75,10 +91,28 @@ public class Livro {
 		this.preco = preco;
 	}
 
+	
+	public Editora getEditora() {
+		return editora;
+	}
+
+	public void setEditora(Editora editora) {
+		this.editora = editora;
+	}
+
+	public List<Autor> getAutores() {
+		return autores;
+	}
+
+	public void setAutores(List<Autor> autores) {
+		this.autores = autores;
+	}
+
 	@Override
 	public String toString() {
-		return "Livro [livroId=" + livroID + ", título=" + titulo + ", data de publicação=" + dataPublicacao
-				+ ", número de Páginas=" + numeroPaginas + ", preço=" + preco + "]";
+		return "Livro [livroID=" + livroID + ", titulo=" + titulo + ", dataPublicacao=" + dataPublicacao
+				+ ", numeroPaginas=" + numeroPaginas + ", preco=" + preco + ", editora=" + editora + ", autores="
+				+ autores + "]";
 	}
 
 }

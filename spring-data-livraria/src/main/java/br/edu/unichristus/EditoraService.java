@@ -11,5 +11,6 @@ public class EditoraService {
 
 	public void salvar(Editora e) {
 		this.repo.save(e);
+		System.out.println("EDITORA " + e.getEditoraID() + " SALVA!");
 	}
 }
